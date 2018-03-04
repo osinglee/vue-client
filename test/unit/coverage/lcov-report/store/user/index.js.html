@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for store/user/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">store/user</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/31</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * user
+ */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import Vue from 'vue'</span>
+<span class="cstat-no" title="statement not covered" >import { LoginApi } from '@/tools/api'</span>
+<span class="cstat-no" title="statement not covered" >import * as types from './user-types'</span>
+&nbsp;
+const AUTH_TOKEN = <span class="cstat-no" title="statement not covered" >'auth.token'</span>
+const AUTH_USER = <span class="cstat-no" title="statement not covered" >'auth.user'</span>
+const ACCOUNT_PWD = <span class="cstat-no" title="statement not covered" >'auth.accountPwd'</span>
+const IS_LOGIN = <span class="cstat-no" title="statement not covered" >'auth.isLogin'</span>
+&nbsp;
+export default {
+  state: {
+    auth: {
+      /** token */
+      token: sessionStorage.getItem(AUTH_TOKEN),
+      /** 用户登陆角色信息 */
+      user: JSON.parse(sessionStorage.getItem(AUTH_USER)),
+      /** 用户登陆账户密码 */
+      accountPwd: JSON.parse(sessionStorage.getItem(ACCOUNT_PWD)),
+      /** 是否登陆 */
+      isLogin: sessionStorage.getItem(IS_LOGIN),
+    }
+  },
+  mutations: {
+    ACCOUNT_AUTH_STATUS_CHANGED: <span class="fstat-no" title="function not covered" >(</span>state, data) =&gt; {
+<span class="cstat-no" title="statement not covered" >      if (data.params.remember) {</span>
+<span class="cstat-no" title="statement not covered" >        Vue.set(state.auth, 'accountPwd', data.params)</span>
+<span class="cstat-no" title="statement not covered" >        window.sessionStorage.setItem(ACCOUNT_PWD, JSON.stringify(data.params))</span>
+      }
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'token', data.token)</span>
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'user', data.staffs[0])</span>
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'isLogin', true)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.setItem(AUTH_TOKEN, data.token)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.setItem(AUTH_USER, JSON.stringify(data.staffs[0]))</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.setItem(IS_LOGIN, true)</span>
+    },
+    ACCOUNT_LOGOUT_FAILURE: <span class="fstat-no" title="function not covered" >(</span>state) =&gt; {
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'accountPwd', null)</span>
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'token', null)</span>
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'user', null)</span>
+<span class="cstat-no" title="statement not covered" >      Vue.set(state.auth, 'isLogin', false)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.removeItem(AUTH_TOKEN)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.removeItem(AUTH_USER)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.removeItem(IS_LOGIN)</span>
+<span class="cstat-no" title="statement not covered" >      window.sessionStorage.removeItem(ACCOUNT_PWD)</span>
+    },
+  },
+  actions: <span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+    accountLoginSubmit ({commit}, params) <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      LoginApi.login(params).then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        commit(types.ACCOUNT_AUTH_STATUS_CHANGED, {...res, params})</span>
+      }).catch(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >        commit(types.ACCOUNT_LOGOUT_FAILURE)</span>
+      })
+    },
+    accountLogoutSubmit ({commit}) <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      LoginApi.logout().then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >        commit(types.ACCOUNT_LOGOUT_FAILURE)</span>
+      })
+    }
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 03 2018 21:49:04 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

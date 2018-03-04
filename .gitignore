@@ -1,0 +1,20 @@
+# Created by .ignore support plugin (hsz.mobi)
+/*
+!/src
+!/build
+!/config
+!/test
+!/.babelrc
+!/.gitignore
+!/package.json
+!/README.md
+!/doc
+!/index.pug
+!/.postcssrc.js
+!/debug.json
+!/.editorconfig
+!/yarn.lock
+!/.npmrc
+!/.eslintignore
+!/.eslintrc.js
+src/packages/ui/
