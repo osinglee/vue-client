@@ -1,13 +1,41 @@
 import axios from 'axios'
 import qs from 'qs'
-import debug from '../../debug.json'
-import user from '../store/user'
+import debug from '../../config/debug.json'
+import { Msg } from './message'
 
+const isLogin = window.sessionStorage.getItem('user.isLogin')
+const token = window.sessionStorage.getItem('user.token')
+
+/**
+ * 请求类
+ */
 export class BaseApi {
-  host
+  servers
 
-  constructor(host) {
-    this.host = host
+  /**
+   * 初始化servers
+   * @param hot
+   */
+  constructor (hot) {
+    const headers = new Headers()
+    headers.set('App-Version', '0.1.0')
+    if (isLogin) headers.set('Authorization', token)
+    this.servers = axios.create({
+      baseURL: `${hot}/api`, // http://moe.cn-su.net/api 测试用
+      headers,
+      timeout: 1,
+    })
+    this.servers.defaults.timeout = 5000
+    this.servers.interceptors.request.use(function (config) {
+      return config
+    }, function (error) {
+      Msg.error(error.message)
+    })
+    this.servers.interceptors.response.use(function (response) {
+      return response
+    }, function (error) {
+      Msg.error(error.message)
+    })
   }
 
   /**
@@ -17,57 +45,14 @@ export class BaseApi {
    * @param body
    * @returns {Promise<any>}
    */
-  connection(method, url, body) {
+  connection (method = 'GET', url, body) {
     if (typeof body !== 'object') body = {}
-    const {isLogin, token} = user.state.auth
-    const headers = new Headers()
-    if (isLogin) headers.set('token', token)
-    headers.set('content-Type', 'application/x-www-form-urlencoded;charset=utf-8')
-    if (method === 'GET' || method === 'HEAD') {
-      url = url + '?' + qs.stringify(body)
-    } else {
-      body = qs.stringify(body)
+    method = method.toLocaleLowerCase()
+    if (method === 'get' || method === 'head' || method === 'delete') {
+      url = `${url}?${qs.stringify(body)}`
+      body = {}
     }
-    const _option = {
-      method,
-      url,
-      baseURL: this.host,
-      timeout: 30000,
-      data: body,
-      headers,
-      withCredentials: true,
-      validateStatus: (status) => {
-        return status >= 200 && status < 300
-      },
-    }
-    return new Promise((resolve, reject) => {
-      axios.request(_option).then(res => {
-        try {
-          switch (res.status) {
-            case 401:
-              return {success: false, msg: '系统好像不认识你！'}
-            case 403:
-              return {success: false, msg: '你没有权限访问此功能！'}
-            case 400:
-              return {success: false, msg: '你没有权限访问此功能！'}
-            case 404:
-              return {success: false, msg: '网络繁忙，请稍后重试！'}
-            default:
-              return {success: true, msg: '', data: res.data}
-          }
-        } catch (err) {
-          return {success: false, msg: '网络繁忙，请稍后重试！', error: err}
-        }
-      }).then(value => {
-        if (value.success) {
-          resolve(value.data)
-        } else {
-          reject(value.msg)
-        }
-      }).catch(err => {
-        return '网络繁忙，请稍后重试！' + err
-      })
-    })
+    return Promise.resolve(this.servers[method](url, body))
   }
 }
 

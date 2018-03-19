@@ -3,23 +3,44 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { store } from './store'
-import { Row, Col, DatePicker, Form, FormItem, Input, Button } from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import {store} from './store'
+import ElementUI from 'element-ui'
+import * as filters from './tools/filter'
+import './assets/icon/iconfont.css'
 import './assets/styles/index.scss'
+import './assets/icon/iconfont.js'
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css'// progress bar style
 
-Vue.prototype.$ELEMENT = {size: 'mini'}
+NProgress.configure({showSpinner: false}); // NProgress Configuration
 
-Vue.use(Row)
-Vue.use(Col)
-Vue.use(DatePicker)
-Vue.use(Form)
-Vue.use(FormItem)
-Vue.use(Input)
-Vue.use(Button)
+Vue.use(ElementUI, {
+  size: 'medium',
+});
 
-Vue.config.productionTip = false // 生产提示关闭
-// Vue.prototype.router = router;
+/** 注册管道 */
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+});
+
+Vue.config.productionTip = false; // 生产提示关闭
+Vue.prototype.router = router;
+
+/** 初始定位到登陆界面，如果没有登陆则无法跳转 */
+router.beforeEach((to, from, next) => {
+  NProgress.start() // start progress bar
+  // let user = !!sessionStorage.getItem('auth.isLogin')
+  // if (!user && to.path !== '/login') {
+  //   next({path: '/login'})
+  //   NProgress.done()
+  // } else {
+  next()
+  // }
+})
+
+router.afterEach(() => {
+  NProgress.done() // finish progress bar
+})
 
 new Vue({
   el: '#app',
@@ -27,4 +48,4 @@ new Vue({
   store,
   template: '<App/>',
   components: {App}
-})
+});

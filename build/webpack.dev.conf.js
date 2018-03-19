@@ -90,7 +90,6 @@ module.exports = new Promise((resolve, reject) => {
           ? utils.createNotifierCallback()
           : undefined
       }))
-
       resolve(devWebpackConfig)
     }
   })

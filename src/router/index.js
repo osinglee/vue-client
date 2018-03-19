@@ -7,16 +7,18 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
-      path: '/user/login',
+      path: '/login',
+      name: 'login',
       component: () => import('../view/login/login')
     },
     {
-      path: '/user/register',
+      path: '/register',
+      name: 'register',
       component: () => import('../view/login/reg')
     },
     {
-      path: '/',
-      component: () => import('../view/home/index'),
+      path: '',
+      component: () => import('../packages/ui/container'),
       children: [
         ...home,
       ]

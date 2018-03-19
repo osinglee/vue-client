@@ -1,9 +1,18 @@
-// 定义sass变量，方法
+@import "element-ui";
 
-/* 改变主题色变量 */
-$--color-primary: #188fff;
+body {
+  font-family: "Microsoft YaHei UI", serif;
+  user-select: none;
+  cursor: default;
+}
 
-/* 改变 icon 字体路径变量，必需 */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
+ul li {
+  list-style: none;
+}
 
-@import "~element-ui/packages/theme-chalk/src/index";
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

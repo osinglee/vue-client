@@ -1,0 +1,40 @@
+{
+  "menu": [
+    {
+      "submenu": "导航一",
+      "icon": "message",
+      "menuGroup": [
+        {
+          "label": "首页",
+          "to": "/"
+        },
+        {
+          "label": "其他",
+          "to": "/payment"
+        },
+        {
+          "label": "关于",
+          "to": "/about"
+        },
+        {
+          "label": "editor",
+          "to": "/editor"
+        },
+        {
+          "label": "new-vuex",
+          "to": "/new-vuex"
+        },
+        {
+          "label": "new2",
+          "to": "/new2"
+        }
+      ]
+    },
+    {
+      "submenu": "导航二",
+      "icon": "menu",
+      "menuGroup": [
+      ]
+    }
+  ]
+}

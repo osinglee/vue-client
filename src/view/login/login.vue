@@ -1,88 +1,138 @@
 <template>
-  <div id="Login">
-    <headers/>
-    <div id="login-s" class='login-wrap'>
-      <div class="container">
-        <div class="ms-title">
-          <span>
-            <router-link to="/user/login" :style="[path === 'login' ? active : '']" class="user-login">登录</router-link>
-          </span>
-          <span class="this-span">·</span>
-          <span>
-            <router-link to="/user/register" :style="[path === 'register' ? active : '']"
-                         class="user-login">注册</router-link>
-          </span>
-        </div>
-        <div class="ms-login">
-          <el-form :model="params" label-width="68px" class="demo-ruleForm">
-            <el-form-item prop="login" label="账号：">
-              <el-input v-model="params.login" placeholder="用户名/邮箱"/>
-            </el-form-item>
-            <el-form-item prop="password" label="密码：">
-              <el-input type="password" placeholder="请输入密码" v-model="params.password"/>
-            </el-form-item>
-            <div class="login-btn">
-              <el-button class="btn-define" @click="submit()">登 录</el-button>
-            </div>
-          </el-form>
-        </div>
-      </div>
-    </div>
+  <div class="login">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px"
+             class="demo-ruleForm login-container">
+      <h3 class="title">系统登录</h3>
+      <el-form-item prop="login">
+        <el-input type="text" v-model="ruleForm.login" auto-complete="off" placeholder="用户名">
+          <i slot="prefix" class="icon iconfont icon-my"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          type="password"
+          v-model="ruleForm.password"
+          auto-complete="off"
+          placeholder="密码"
+        >
+          <i slot="prefix" class="icon iconfont icon-jiesuo"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-checkbox
+          label="记住账号" name="type" v-model="ruleForm.remember"
+          style="text-align: left">
+        </el-checkbox>
+      </el-form-item>
+      <el-form-item>
+        <el-button style="width: 100%;" type="primary" @click.native.prevent="submitForm('ruleForm')"
+                   :loading="loading">登陆
+        </el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-import Headers from '@/packages/components/common/Headers'
-import { mapState } from 'vuex'
-import './login.scss'
+  import {mapState} from 'vuex'
 
-export default {
-  name: 'Login',
-  components: {
-    Headers
-  },
-  data () {
-    return {
-      params: {
-        login: '',
-        password: '',
-      },
-      active: {
-        'color': '#00b5ad',
-        'font-weight': 'bold',
-        'border-bottom': '3px solid #00b5ad',
-      },
-      path: this.$route.path.split('/')[2],
-    }
-  },
-  computed: mapState({
-    isLogin: state => state.user.auth.isLogin,
-    user: state => state.user.auth.user
-  }),
-  beforecreate: {
-    // todo 判断是否有保存登录信息，如果有，则取出并赋值到对应的位置
-  },
-  methods: {
-    submit () {
-      this.$store.dispatch('accountLoginSubmit', {
-        login: '15223719447',
-        password: '12345678',
-        type: 0,
-        remember: true
-      })
+  export default {
+    name: 'Login',
+    components: {
     },
-    successWatcher (val, oldVal) {
-      if (val) {
-        const redirectUrl = this.$route.query.redirect_url || '/'
-        this.$router.push(redirectUrl)
+    /** state 默认信息 */
+    data() {
+      return {
+        loading: false,
+        ruleForm: {
+          login: '',
+          password: '',
+          remember: false
+        },
+        rules: {
+          login: [
+            {required: true, message: '请输入登陆账户', trigger: 'blur'},
+            {min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur'}
+          ],
+          password: [
+            {required: true, message: '请输入登陆密码', trigger: 'change'}
+          ],
+        }
+      }
+    },
+    /** 计算属性 */
+    computed: {},
+    mounted() {
+      this.getUser()
+    },
+    /** 方法事件 */
+    methods: {
+      getUser() {
+        this.ruleForm = this.$store.getters.user
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.loading = true
+            this.$store.dispatch('accountLoginSubmit', {
+              login: '15223719447',
+              password: '12345678',
+              remember: true
+            }).then(() => {
+              this.loading = false
+              this.$router.push({path: '/'})
+            }).catch(() => {
+              this.loading = false
+            })
+          } else {
+            return false
+          }
+        })
+      },
+    },
+    /** 监听函数 */
+    watch: {
+      $route() {
+        this.path = this.$route.path.split('/')[2]
       }
     }
-  },
-  watch: {
-    isLogin: 'successWatcher',
-    $route (to, from) {
-      this.path = this.$route.path.split('/')[2]
+  }
+</script>
+
+<style lang="scss" scoped>
+  .login {
+    width: 100%;
+    height: 100%;
+    .el-form-item {
+      .el-form-item__content {
+        .icon {
+          position: absolute;
+          left: 8px;
+          z-index: 1;
+        }
+      }
     }
   }
-}
-</script>
+
+  .login-container {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    width: 350px;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    overflow: hidden;
+    min-width: 270px;
+    .title {
+      text-align: center;
+      color: #505458;
+    }
+  }
+</style>
