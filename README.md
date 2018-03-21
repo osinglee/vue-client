@@ -1,14 +1,5 @@
 ## vue-client
 
--
-     - [webpack](http://webpack.github.io/)
-     - [vue](https://cn.vuejs.org/v2/guide/index.html)
-     - [vuex](https://vuex.vuejs.org/zh-cn/intro.html)
-     - [scss](https://www.sass.hk/docs/)
-     - [element-ui](http://element-cn.eleme.io/#/zh-CN/component/installation)
-     - babel
-     - localStorage / sessionStorage
-
 - 使用  
   - 运行环境: "node": ">= 6.0.0" "npm": ">= 3.0.0"
     
@@ -22,6 +13,3 @@
    - 启动 `npm start`
    - 编译 `npm run build`
 
-- debug.json
-   - servers : 后台服务器地址
-   - dev : 本地开发环境

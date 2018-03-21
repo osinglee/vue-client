@@ -2,7 +2,6 @@
 /*
 !/build
 !/config
-!/doc
 !/src
 !/test
 !/.babelrc
@@ -10,7 +9,6 @@
 !/.eslintignore
 !/.eslintrc.yml
 !/.gitignore
-!/.npmrc
 !/.postcssrc.js
 !/index.pug
 !/package.json
