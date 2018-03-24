@@ -2,6 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import debug from '../../config/debug.json'
 import {Msg} from './message'
+import {store} from '../store'
 
 /**
  * 请求类
@@ -21,7 +22,6 @@ export class BaseApi {
       headers,
       timeout: 1,
     });
-    this.getStatusToken();
     this.servers.defaults.timeout = 5000;
     this.servers.interceptors.request.use(function (config) {
       return config
@@ -71,8 +71,7 @@ export class BaseApi {
    * @returns {{isLogin: string, token: string}}
    */
   getStatusToken() {
-    const isLogin = window.sessionStorage.getItem('user.isLogin');
-    const token = window.sessionStorage.getItem('user.token');
+    const {isLogin, token} = store.getters;
     this.setToken({isLogin, token})
   }
 }
