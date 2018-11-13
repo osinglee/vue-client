@@ -1,9 +1,15 @@
-doctype
-html(lang="zh-CN")
-  head
-    base(href="/")
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,height=device-height")
-    title #{htmlWebpackPlugin.options.title}
-  body
-    #app
+doctype html
+
+<!--[if IE 9]>
+<html lang="zh-CN" class="lt-ie9">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+head
+  base(href="/")
+  meta(charset="utf-8")
+  meta(name="viewport", content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,height=device-height")
+  title #{htmlWebpackPlugin.options.title}
+body
+  #example

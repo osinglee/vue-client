@@ -11,9 +11,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : require('../config/prod.env')
+const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -37,7 +35,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          warnings: false
+          warnings: false,
+          // drop_debugger: true,
+          // drop_console: true
         }
       },
       sourceMap: config.build.productionSourceMap,
@@ -45,7 +45,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: utils.assetsPath('css/[name].[contenthash].css'),
+      filename: utils.assetsPath('css/[name].[contenthash:8].css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with styles-loader when the codesplit chunk has been loaded by webpack.
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
@@ -63,13 +63,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.build.index,
+      filename: config.build.index,
       template: '!!pug-loader!index.pug',
       inject: true,
-      title: 'vue-client',
-      favicon: path.resolve(__dirname, '../src/assets/images/logo.png'),
+      title: '重庆市学生资助与经费监管平台',
+      favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -113,15 +111,47 @@ const webpackConfig = merge(baseWebpackConfig, {
       children: true,
       minChunks: 3
     }),
-
+    // split spread-sheets into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'spread-sheets',
+      minChunks(module) {
+        const context = module.context;
+        return context && (context.indexOf('@grapecity/spread-sheets') >= 0);
+      }
+    }),
+    // split spread-excelio into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'spread-excelio',
+      minChunks(module) {
+        const context = module.context;
+        return context && (context.indexOf('@grapecity/spread-excelio') >= 0);
+      }
+    }),
+    // split moment into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'moment',
+      minChunks(module) {
+        const context = module.context;
+        return context && (context.indexOf('moment') >= 0);
+      }
+    }),
+    // split ueditor into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'ueditor',
+      minChunks(module) {
+        const context = module.context;
+        return context && (context.indexOf('ueditor') >= 0);
+      }
+    }),
     // copy custom static assets
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: path.resolve(__dirname, '../static'),
-    //     to: config.build.assetsSubDirectory,
-    //     ignore: ['.*']
-    //   }
-    // ])
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ]),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
   ]
 })
 

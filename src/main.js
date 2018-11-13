@@ -7,23 +7,21 @@ import {store} from './store'
 import ElementUI from 'element-ui'
 import * as filters from './tools/filter'
 import './assets/icon/iconfont.css'
-import './assets/styles/index.scss'
-import './assets/icon/iconfont.js'
+import './styles/index.scss'
 import './permission'
 
 Vue.use(ElementUI, {
-  size: 'medium',
+  size: 'small',
 });
 
 /** 注册管道 */
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-});
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]));
 
-Vue.config.productionTip = false; // 生产提示关闭
+/** 生产提示关闭 */
+Vue.config.productionTip = false;
 
 new Vue({
-  el: '#app',
+  el: '#example',
   router,
   store,
   template: '<App/>',

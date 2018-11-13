@@ -25,13 +25,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/servers.js
   devServer: {
     clientLogLevel: 'warning',
-    historyApiFallback: {
-      rewrites: [
-        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')},
-      ],
-    },
+    historyApiFallback: true,
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
+    // contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -57,8 +53,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: '!!pug-loader!index.pug',
       inject: true,
-      title: 'vue-client',
-      favicon: path.resolve(__dirname, '../src/assets/images/logo.png'),
+      title: '重庆市学生资助与经费监管平台',
+      favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
+      path: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
     }),
     // new CopyWebpackPlugin([
     //   {
