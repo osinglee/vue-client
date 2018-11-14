@@ -53,7 +53,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: '!!pug-loader!index.pug',
       inject: true,
-      title: '重庆市学生资助与经费监管平台',
+      title: 'vue-element-admin',
       favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
       path: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
     }),

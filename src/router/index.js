@@ -17,6 +17,17 @@ const router = new Router({
       component: () => import('../packages/ui/errorPage/404.vue')
     },
     {
+      path: '/',
+      component: () => import('../packages/ui/container.vue'),
+      children: [
+        {
+          path: 'index',
+          name: 'index',
+          component: () => import('../view/index')
+        },
+      ]
+    },
+    {
       path: '*',
       name: 'err',
       redirect: '404',

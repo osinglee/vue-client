@@ -3,7 +3,7 @@
     <div class="ec-logo"></div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px"
              class="demo-ruleForm login-container">
-      <h3 class="mh-login-title">重庆市学生资助与经费监管平台</h3>
+      <h3 class="mh-login-title">系统登录</h3>
       <el-form-item prop="loginStr" label="用户名:">
         <el-input
           type="text"
@@ -38,7 +38,7 @@
       </el-button>
       <br>
       <br>
-      <div class="mh-login-footer">重庆市教委经费监管事务中心 {{version}}</div>
+      <div class="mh-login-footer">vue-element-admin {{version}}</div>
     </el-form>
   </div>
 </template>
@@ -46,6 +46,7 @@
 <script>
   import {version} from '../../../package'
   import {mapState} from 'vuex'
+  import {db} from '../../tools/db'
 
   export default {
     name: 'Login',
@@ -58,11 +59,11 @@
         rules: {
           loginStr: [
             {required: true, message: '请输入登录账号', trigger: 'change'},
-            {min: 6, max: 12, message: '账号长度在6-12位', trigger: 'change'}
+            {min: 3, max: 11, message: '账号长度在3-11位', trigger: 'change'}
           ],
           password: [
             {required: true, message: '请输入登录密码', trigger: 'change'},
-            {min: 6, max: 12, message: '密长度在6-12位', trigger: 'change'}
+            {min: 3, max: 11, message: '密长度在3-11位', trigger: 'change'}
           ],
         }
       }
@@ -91,13 +92,10 @@
       submitForm() {
         this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
+            console.log(valid);
             this.loading = true;
-            this.$store.dispatch('accountLoginSubmit', this.ruleForm).then(() => {
-              this.loading = false;
-              this.$router.push({path: '/index'})
-            }).catch(() => {
-              this.loading = false;
-            })
+            db.set('user.login', true);
+            this.$router.push('/index');
           } else {
             return false
           }
